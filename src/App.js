@@ -1,33 +1,24 @@
 import './App.css';
 import Header from './myComponents/Header';
 import Footer from './myComponents/Footer';
-import Tasks from './myComponents/Tasks';
-import AddTask from './myComponents/AddTask';
-import { useState } from 'react';
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from './myComponents/Home';
+import About from './myComponents/About';
 
 function App() {
-  const [TempTasks, setTask] = useState([])
 
-  function onDelete(task) {
-    setTask(TempTasks.filter((e) => e !== task))
-  }
-
-  function add(data) {
-    const task = {
-      id: TempTasks.length + 1,
-      title: data.title,
-      desc: data.desc
-    }
-    setTask([...TempTasks, task])
-    console.log(TempTasks)
-  }
   return (
     <>
-      <Header title="Task Management" />
-      <AddTask add={add} />
-      <Tasks TempTask={TempTasks} onDelete={onDelete} />
-      <Footer />
+      <Router>
+
+        <Header title="Task Management" />
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+        <Footer />
+      </Router>
     </>
   );
 }
