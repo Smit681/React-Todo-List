@@ -16,7 +16,6 @@ export default function Home() {
             desc: data.desc
         }
         setTask([...TempTasks, task])
-        console.log(TempTasks)
     }
     return (
         <>
