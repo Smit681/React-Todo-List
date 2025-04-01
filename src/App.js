@@ -1,24 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './myComponents/Header';
+import Footer from './myComponents/Footer';
+import Tasks from './myComponents/Tasks';
+import AddTask from './myComponents/AddTask';
+import { useState } from 'react';
+
 
 function App() {
+  const [TempTasks, setTask] = useState([])
+
+  function onDelete(task) {
+    setTask(TempTasks.filter((e) => e !== task))
+  }
+
+  function add(data) {
+    const task = {
+      id: TempTasks.length + 1,
+      title: data.title,
+      desc: data.desc
+    }
+    setTask([...TempTasks, task])
+    console.log(TempTasks)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header title="Task Management" />
+      <AddTask add={add} />
+      <Tasks TempTask={TempTasks} onDelete={onDelete} />
+      <Footer />
+    </>
   );
 }
 
